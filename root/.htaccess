@@ -1,0 +1,12 @@
+RewriteEngine On
+
+RewriteRule ^Library/ prograndson.php[QSA,L]
+RewriteRule ^Errors/ prograndson.php[QSA,L]
+RewriteRule ^Applications/ prograndson.php[QSA,L]
+RewriteRule ^Settings/ prograndson.php[QSA,L]
+RewriteRule ^Modules/ prograndson.php[QSA,L]
+RewriteRule ^Upload/ prograndson.php[QSA,L]
+RewriteRule ^Log/ prograndson.php[QSA,L]
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ prograndson.php [QSA,L]

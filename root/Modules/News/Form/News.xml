@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<form>
+	<form_elem form_type="StringField">
+		<info name="label" value="TITLE" />
+		<info name="name" value="title"/>
+	</form_elem>
+	<form_elem form_type="TextField">
+		<info name="label" value="TXT_CONTENT" />
+		<info name="name" value="txt_content" />
+	</form_elem>
+	<form_elem form_type="RadioField">
+		<info name="label" value="VISIBILITY" />
+		<info name="name" value="visible" />
+		<info name="listVal" value="1;0" />
+		<info name="textAffiche" value="IS_VISIBLE;NOT_VISIBLE" />
+	</form_elem>
+</form>

@@ -1,0 +1,35 @@
+#cropContainerHeader {
+	width: 2000px;
+	height: 400px;
+	position:relative; /* or fixed or absolute */
+}
+
+#croppic_div {
+	width: 1000px;
+	height: 200px;
+	display: none;
+}
+
+#croppic_div_2 {
+	width: 670px;
+	height: 435px;
+	display: none;
+}
+
+#croppic_div_3 {
+	width: 763px;
+	height: 630px;
+	display: none;
+}
+
+#croppic_div_event {
+	width: 200px;
+	height: 315px;
+	display: none;
+}
+
+#croppic_div_event_3 {
+	width: 382px;
+	height: 315px;
+	display: none;
+}

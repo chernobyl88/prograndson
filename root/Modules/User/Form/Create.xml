@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+<form>
+	<form_elem form_type="StringField">
+		<info name="label" value="NAME" />
+		<info name="name" value="nom" />
+	</form_elem>
+	<form_elem form_type="StringField">
+		<info name="label" value="FIRST_NAME" />
+		<info name="name" value="prenom" />
+	</form_elem>
+	<form_elem form_type="EmailField">
+		<info name="label" value="EMAIL" />
+		<info name="name" value="email" />
+	</form_elem>
+	<form_elem form_type="SelectField">
+		<info name="label" value="LANGUAGE_CHOICE" />
+		<info name="name" value="[FRENCH|fr-FR;ENGLISH|en-EN;ITALIAN|it-IT]" />
+	</form_elem>
+	<form_elem form_type="TelField">
+		<info name="label" value="TELEPHON_NUMBER" />
+		<info name="name" value="no_tel" />
+	</form_elem>
+</form>
