@@ -13,7 +13,7 @@ $(function () {
 			flash_swf_url : './Web/Moxie/Moxie.swf',
 			silverlight_xap_url : './Web/Moxie/Moxie.xap',
 			chunk_size: '200kb',
-			
+
 			filters : {
 				max_file_size : '10mb',
 				mime_types: [
@@ -25,7 +25,7 @@ $(function () {
 				"dir" : "/Upload/News/Img/",
 				"validExt" : valid_ext
 			},
-	
+
 			init: {
 				FilesAdded: function(up, files) {
 					uploader.start();
@@ -33,13 +33,13 @@ $(function () {
 				ChunkUploaded: function (up, file, response) {
 					try {
 						rep = JSON.parse(response.response);
-						
+
 						if (!rep.valid) {
 							if (rep.message && rep.message[0])
 								error = rep.message[0];
 							else
 								error = "Unknown error";
-							
+
 		                    up.trigger('Error', {
 		                        code : -300, // IO_ERROR
 		                        message : 'Upload Failed: ' + error,
@@ -59,14 +59,14 @@ $(function () {
 				FileUploaded: function (up, file, response) {
 					try {
 						rep = JSON.parse(response.response);
-						
+
 						if (!rep.valid) {
 							error = "undefined error"
 							if (rep.error)
 								error = rep.error;
 							else
 								error = "Unknown error"
-							
+
 		                    up.trigger('Error', {
 		                        code : -300, // IO_ERROR
 		                        message : 'Upload Failed: ' + error,
@@ -75,20 +75,20 @@ $(function () {
 		                    });
 						} else {
 							imgId = ((rep.listeId.length > 0) ? rep.listeId[0] : 0)
-							
+
 							$.ajax({
 								type: "POST",
 						        url: "./Admin/News/add.html",
 							 	data : {
 								 	"file_id" : imgId,
 								 	id: <?php echo $news->id()?>,
-									"title" : $("#title").val() 
+									"title" : $("#title").val()
 							 	},
 								dataType: "json"
 							}).done(function(data) {
 							 	if (data.valid == "1") {
 								 	if (imgId > 0)
-								 		$("#file_img").empty().append(	
+								 		$("#file_img").empty().append(
 											$("<img>", {src: "./Img/std-" + imgId + ".jpg"}).addClass("max-width-200")
 										)
 							 	} else {
@@ -113,7 +113,7 @@ $(function () {
 	                    });
 					}
 				},
-	
+
 				Error: function(up, err) {
 	                switch (err.code) {
 		                case -500:
@@ -128,17 +128,17 @@ $(function () {
 		                default:
 		    				alertify.alert("Error #" + err.code + ": " + err.message);
 	                }
-	                
+
 					up.destroy();
 					initUploader();
 				}
 			}
 		});
-	
+
 		uploader.init();
 	}
 	initUploader()
-	
+
 	tinymce.init({
 		mode : "none",
 		selector : '.tinyArea',
@@ -177,7 +177,7 @@ $(function () {
 	$("#news_form").submit(function (e) {
 		tinyMCE.triggerSave();
 		e.preventDefault();
-		
+
 		$.ajax({
 			url: "./Admin/News/add.html",
 			data: $("#news_form").serialize(),
@@ -197,7 +197,7 @@ $(function () {
 			alertify.alert(err);
 		})
 
-		
+
 	})
 })
 </script>
@@ -212,27 +212,27 @@ $dateFormat = \Utils::getDateFormat(\Utils::getFormatLanguage($user->getLanguage
 		<div class="row col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-top-10 main_bloc">
 			<form id="news_form">
 				<input type="hidden" name="id" value="<?php echo $news->id()?>">
-				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<label for="title">
+				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<label for="title" class="poiret  title_custom">
 							Titre
 						</label>
 					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<input class="col-lg-12 col-md-12 col-sm-12 col-xs-12 elem_form" type="text" id="title" name="title" value="<?php echo $news->title()?>">
 					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<label for="visible">
-							Visibilité
-						</label>
-					</div>
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<input class="elem_form" type="checkbox" id="visible" name="visible"<?php echo ($news->visible()) ? " checked": "";?>>
-					</div>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<label for="visible" class="poiret title_custom">
+						Visibilité
+					</label>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+					<input class="elem_form" type="checkbox" id="visible" name="visible"<?php echo ($news->visible()) ? " checked": "";?>>
 				</div>
 				<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<label for="chapeau">
+						<label for="chapeau" class="poiret title_custom">
 							Chapeau
 						</label>
 					</div>
@@ -240,7 +240,7 @@ $dateFormat = \Utils::getDateFormat(\Utils::getFormatLanguage($user->getLanguage
 						<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 elem_form" rows="5" id="chapeau" name="chapeau"><?php echo $news->chapeau()?></textarea>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<label for="txt_content">
+						<label for="txt_content" class="poiret title_custom">
 							Contenu
 						</label>
 					</div>
@@ -249,31 +249,31 @@ $dateFormat = \Utils::getDateFormat(\Utils::getFormatLanguage($user->getLanguage
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
-						<label for="date_crea">
+					<div class="">
+						<label for="date_crea" class="poiret title_custom">
 							Date
 						</label>
 					</div>
-					<div class="col-lg-8 col-md-8 col-sm-8 col-xs-8">
-						<input class="col-lg-12 col-md-12 col-sm-12 col-xs-12 elem_form" type="date" id="date_crea" name="date_crea" value="<?php echo \Utils::formatDate($news->date_crea(), $dateFormat[1])?>">
+					<div class="">
+						<input class=" elem_form" type="date" id="date_crea" name="date_crea" value="<?php echo \Utils::formatDate($news->date_crea(), $dateFormat[1])?>">
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding poiret title_custom">
 						Image de présentation
 					</div>
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 no-padding">
 						<input type="button" id="addFile" value="Ajouter un fichier">
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="file_img">
 						<?php
 						if ($news->file_id() > 0) {
 							?>
-							<img class="max-width-200" src="./Img/std-<?php echo $news->file_id();?>.jpg">
+							<img class="max-width-200 img-responsive" src="./Img/std-<?php echo $news->file_id();?>.jpg">
 							<?php
 						}
 						?>
-						
+
 					</div>
 				</div>
 			</form>
