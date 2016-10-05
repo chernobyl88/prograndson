@@ -50,7 +50,7 @@ function getListData($elem, $root) {
 					$html .= "</div>
 						</div>
 					</div>";
-				
+
 				return $html;
 				break;
 		case "elem":
@@ -103,7 +103,7 @@ function getListData($elem, $root) {
 
 					foreach (array_filter($elem->liste_elem(), function ($arg) {return $arg->name() == "tail";}) AS $t)
 						$html .= getListData($t, $root);
-					
+
 					return $html;
 			}
 		default:
@@ -151,7 +151,7 @@ function getListData($elem, $root) {
 			}
 		})
 	}
-	
+
 	function appendElement(pType, pId) {
 		$elem = $("<div>", {id: "div_item_"+pId}).append(
 					$("<div>").append(
@@ -161,8 +161,8 @@ function getListData($elem, $root) {
 						})
 					)
 				);
- 
-		
+
+
 		switch (pType) {
 			case "text":
 				$elem.append(
@@ -170,7 +170,7 @@ function getListData($elem, $root) {
 				)
 				break;
 			case "img":
-			
+
 				$elem.append(
 					$("<div>").addClass("container_event_galerie").append(
 						$("<div>").addClass("margin-top-10 margin-bottom-30").append(
@@ -189,7 +189,7 @@ function getListData($elem, $root) {
 										success: function (ret, statusText, xhr, $form) {
 											if (ret.status && ret.status == "success") {
 												form = that.form;
-									
+
 												$.ajax({
 													  type: "POST",
 													  url: "<?php echo $root?>/Presentation/sendImg-" + $(form).attr("id_for") + ".html",
@@ -260,13 +260,13 @@ function getListData($elem, $root) {
 	<?php
 	}
 	?>
-	
+
 	function changeDesc(ed) {
-	
+
 		tinyMCE.triggerSave();
 		that = ed.getElement();
 		$.LoadingOverlay("show");
-		
+
 		$.ajax({
 			  type: "POST",
 			  url: '<?php echo $rootLang?>/Presentation/changeDesc-' + $(that).attr("id_for") + '.html',
@@ -287,9 +287,9 @@ function getListData($elem, $root) {
 			$.LoadingOverlay("hide", true);
 			alertify.alert("Erreur : "+textStatus)
 		});
-		
+
 	}
-	
+
 	$(function () {
 // 		$("#datepicker_deb").datepicker({
 // 			"dateFormat": "dd-mm-yy",
@@ -341,19 +341,19 @@ function getListData($elem, $root) {
 			}).on( "change", function() {
 				from.datepicker("option", "maxDate", getDate(this));
 			});
-		
+
 		function getDate(element) {
 			var date;
-			
+
 			try {
 				date = $.datepicker.parseDate("dd/mm/yy", element.value);
 			} catch( error ) {
 				date = null;
 			}
-			
+
 			return date;
 		}
-		
+
 		<?php
 		if ($isEvent) {
 		?>
@@ -369,7 +369,7 @@ function getListData($elem, $root) {
 				success: function (ret, statusText, xhr, $form) {
 					if (ret.status && ret.status == "success") {
 						form = that.form;
-			
+
 						$.ajax({
 							  type: "POST",
 							  url: "<?php echo $root?>/Presentation/sendImg-" + $(form).attr("id_for") + ".html",
@@ -409,7 +409,7 @@ function getListData($elem, $root) {
 		}
 		?>
 
-		
+
 		tinymce.init({
 			mode : "none",
 			selector:'.tinyArea',
@@ -434,7 +434,7 @@ function getListData($elem, $root) {
 		?>
 		$(".add_ellement").click(function(event) {
 			event.preventDefault();
-			
+
 			that = this;
 			$.ajax({
 				type: "POST",
@@ -461,7 +461,7 @@ function getListData($elem, $root) {
 		<?php
 		}
 		?>
-		
+
 		$(".item").change(function() {
 			that = this;
 			$.LoadingOverlay("show");
@@ -489,9 +489,9 @@ function getListData($elem, $root) {
 				$.LoadingOverlay("hide", true);
 				alertify.alert("Erreur : "+textStatus)
 			});
-			
+
 		})
-		
+
 		var cropperOptions = {
 				doubleZoomControls:false,
 				imgEyecandy:false,
@@ -544,7 +544,7 @@ function getListData($elem, $root) {
 					console.log('onReset')
 				}
 		}
-		
+
 		var cropperHeader = new Croppic('croppic_div_event', cropperOptions);
 		<?php
 		if ($isEvent) {
@@ -613,7 +613,7 @@ function getListData($elem, $root) {
 					console.log('onReset')
 				}
 		}
-		
+
 		var cropperHeader2 = new Croppic('croppic_div_event_3', cropperOptions2);
 
 		$(".slider_crop_button").click(function() {
@@ -622,83 +622,39 @@ function getListData($elem, $root) {
 			$("#crop_button").trigger("click");
 		})
 		<?php
-		}	
+		}
 		?>
 	})
 </script>
 <div style="display:none;">
 	<input id="crop_button" style='display:none;'>
 </div>
-				
+
 <div class="container">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 main_bloc margin-top-20">
 	<div class="row">
 		<div class="col-lg-6 pull-left">
 			<a href="<?php echo $root;?>/<?php echo ($isEvent) ? "Event": "Actualite";?>/" class="btn btn-primary"><i class="fa fa-mail-reply"></i> Retour</a>
 		</div>
-		<div class="col-lg-4 text-right">
-			<h5 class="red margin-bottom-10"><?php echo ($isEvent) ? PUBLISHING_EVENT : "Publier une actualité"?></h5>
-			<div>
-				<label for="unpublish_event"><?php echo PUBLISH_EVENT?></label> 
-				<input type="radio" id="unpublish_event" class="item" name="published" value="1" <?php echo ($event->published()) ? "checked='checked'": "";?>>
-			</div>
-		
-			<div>
-				<label for="publish_event"><?php echo UNPUBLISH_EVENT?></label>
-				<input type="radio" id="publish_event" class="item" name="published" value="0" <?php echo ($event->published() == 0) ? "checked='checked'": "";?>> 
-			</div>
-			
-		</div>
 	</div>
 	<div class="row margin-bottom-30">
-		<div class="col-lg-2">
+		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
+			<div class="event_date form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<label class="title_custom col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding"> Date de l'événement </label>
+				<input id="datepicker_deb" type="text" name="date_event" class="item  col-lg-6 col-md-6 col-sm-6 col-xs-6" value="<?php echo ($date_event->key() > 0) ? $date_event->val()->format($format[1]) : "";?>">
+				<input id="datepicker_fin" type="text" name="end_date" class="item  col-lg-6 col-md-6 col-sm-6 col-xs-6" value="<?php echo ($end_date->key() > 0) ? $end_date->val()->format($format[1]) : "";?>">
+			</div>
 
-				<h5><?php echo EVENT_COVER_IMG;?></h5>
-			
-				<a class="btn btn-primary" id="croppic_button"><?php echo PRESENTATION_LOAD_IMAGE;?></a>
-			
-			<div id="croppic_div_event_3">
+			<div class="event_title form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<label class="title_custom col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding"> Nom de l'événement </label>
+				<input type="text" name="main_title" class="" value="<?php echo $event->nom();?>">
 			</div>
-			<div id="croppic_div_event">
-			</div>
-			<div class="container_img_event margin-top-30" id="current_cover"
-			<?php
-			if (!($cover_img->key() == "" || (is_numeric($cover_img->key() && $cover_img->key() < 1)))) {
-				?>
-					 style="background:url('./Img/std-<?php echo $cover_img->key();?>.jpg');webkit-background-size: cover;background-size: cover;">
-					
-				<?php
-			}else{
-			?>
-				>
-			<?php
-			}
-			?>
-				
-			
-			</div>
-			<div class="margin-top-30">
-				<?php echo EVENT_COVER_DETAIL;?>
-			</div>
-		
-		</div>
-		<div class="col-lg-9">
-			<div class="event_date form-group">
-				<label> Date de l'événement </label>
-				<input id="datepicker_deb" type="text" name="date_event" class="item" value="<?php echo ($date_event->key() > 0) ? $date_event->val()->format($format[1]) : "";?>">
-				<input id="datepicker_fin" type="text" name="end_date" class="item" value="<?php echo ($end_date->key() > 0) ? $end_date->val()->format($format[1]) : "";?>">
-			</div>
-			
-			<div class="event_title form-group">
-				<label> Nom de l'événement </label>
-				<input type="text" name="main_title" class="item" value="<?php echo $event->nom();?>">
-			</div>
-			
-			<div class="event_text form-group margin-bottom-30">
-				<label> Contenu texte </label>
+
+			<div class="event_text form-group margin-bottom-30 col-lg-12 col-md-12 col-sm-12 col-xs-12">
+				<label class="title_custom"> Contenu texte </label>
 				<textarea name="base_txt" class="tinyArea item" id_for="<?php echo $base_txt->id();?>"><?php echo $base_txt->val();?></textarea>
 			</div>
-			
+
 			<?php
 			if ($isEvent) {
 				?>
@@ -707,10 +663,10 @@ function getListData($elem, $root) {
 				</div>
 				<?php
 			}
-			
+
 			if ($isEvent){
 				?>
-				<div class="margin-top-30">
+				<div class="margin-top-30 col-lg-12 col-md-12 col-sm-12 col-xs-12">
 					<div class="inline margin-right-10">
 						<a class="btn btn-primary add_ellement" type="para"><i class="fa fa-plus"></i>&nbsp;&nbsp;<?php echo ADD_PARAGRAPHE;?></a>
 					</div>
@@ -725,7 +681,51 @@ function getListData($elem, $root) {
 			}
 		?>
 		</div>
-	
+		<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding margin-bottom-20">
+				<h5 class="red margin-bottom-10 title_custom"><?php echo ($isEvent) ? PUBLISHING_EVENT : "Publier une actualité"?></h5>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 no-padding">
+					<label for="unpublish_event" class=" btn btn-primary"><?php echo PUBLISH_EVENT?></label>
+					<input type="radio" id="unpublish_event" class="item" name="published" value="1" <?php echo ($event->published()) ? "checked='checked'": "";?>>
+				</div>
+
+				<div  class="col-lg-6 col-md-6 col-sm-6 col-xs-6 no-padding">
+					<label for="publish_event"  class=" btn btn-primary"><?php echo UNPUBLISH_EVENT?></label>
+					<input type="radio" id="publish_event" class="item" name="published" value="0" <?php echo ($event->published() == 0) ? "checked='checked'": "";?>>
+				</div>
+
+			</div>
+
+				<h5 class="title_custom"><?php echo EVENT_COVER_IMG;?></h5>
+
+				<a class="btn btn-primary" id="croppic_button"><?php echo PRESENTATION_LOAD_IMAGE;?></a>
+
+			<div id="croppic_div_event_3">
+			</div>
+			<div id="croppic_div_event">
+			</div>
+			<div class="container_img_event margin-top-30" id="current_cover"
+			<?php
+			if (!($cover_img->key() == "" || (is_numeric($cover_img->key() && $cover_img->key() < 1)))) {
+				?>
+					 style="background:url('./Img/std-<?php echo $cover_img->key();?>.jpg');webkit-background-size: cover;background-size: cover;">
+
+				<?php
+			}else{
+			?>
+				>
+			<?php
+			}
+			?>
+
+
+			</div>
+			<div class="margin-top-30">
+				<?php echo EVENT_COVER_DETAIL;?>
+			</div>
+
+		</div>
 	</div>
 	</div>
 </div>

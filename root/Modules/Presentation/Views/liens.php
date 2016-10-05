@@ -18,7 +18,7 @@ if ($user->getAdminLvl() > 5) {
 								method: "POST"
 							}).done(function (json) {
 								if (json.valid) {
-									location.reload(); 
+									location.reload();
 								} else
 									if (json.message)
 										$.each(json.message, function (k, v) {
@@ -105,7 +105,7 @@ if ($user->getAdminLvl() > 5) {
 				}
 			} else {
 				?>
-				<h3 class="center">Aucun liens de partenaire pour le moment</h3>
+				<h3 class="center">Aucun lien de partenaire pour le moment</h3>
 				<?php
 			}
 			?>
