@@ -219,7 +219,7 @@ $dateFormat = \Utils::getDateFormat(\Utils::getFormatLanguage($user->getLanguage
 						</label>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<input class="col-lg-12 col-md-12 col-sm-12 col-xs-12 elem_form" type="text" id="title" name="title" value="<?php echo $news->title()?>">
+						<input class="col-lg-12 col-md-12 col-sm-12 col-xs-12 elem_form custom-input" type="text" id="title" name="title" value="<?php echo $news->title()?>">
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -237,7 +237,7 @@ $dateFormat = \Utils::getDateFormat(\Utils::getFormatLanguage($user->getLanguage
 						</label>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 elem_form" rows="5" id="chapeau" name="chapeau"><?php echo $news->chapeau()?></textarea>
+						<textarea class="col-lg-12 col-md-12 col-sm-12 col-xs-12 elem_form custom-input" rows="5" id="chapeau" name="chapeau"><?php echo $news->chapeau()?></textarea>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<label for="txt_content" class="poiret title_custom">
@@ -245,7 +245,7 @@ $dateFormat = \Utils::getDateFormat(\Utils::getFormatLanguage($user->getLanguage
 						</label>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<textarea class="tinyArea col-lg-12 col-md-12 col-sm-12 col-xs-12" rows="5" type="text" id="txt_content" name="txt_content"><?php echo $news->txt_content()?></textarea>
+						<textarea class="tinyArea col-lg-12 col-md-12 col-sm-12 col-xs-12 " rows="5" type="text" id="txt_content" name="txt_content"><?php echo $news->txt_content()?></textarea>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -255,7 +255,7 @@ $dateFormat = \Utils::getDateFormat(\Utils::getFormatLanguage($user->getLanguage
 						</label>
 					</div>
 					<div class="">
-						<input class=" elem_form" type="date" id="date_crea" name="date_crea" value="<?php echo \Utils::formatDate($news->date_crea(), $dateFormat[1])?>">
+						<input class=" elem_form custom-input" type="date" id="date_crea" name="date_crea" value="<?php echo \Utils::formatDate($news->date_crea(), $dateFormat[1])?>">
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
@@ -263,7 +263,7 @@ $dateFormat = \Utils::getDateFormat(\Utils::getFormatLanguage($user->getLanguage
 						Image de présentation
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-20 no-padding">
-						<input type="button" id="addFile" value="Ajouter un fichier">
+						<input type="button" id="addFile" value="Ajouter un fichier" class="btn btn-primary">
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="file_img">
 						<?php

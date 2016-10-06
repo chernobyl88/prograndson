@@ -302,7 +302,9 @@
 
 /*my css*/
 
-
+.padding-side-15{
+	padding: 0px 15px;
+}
 /*divers*/
 
 .divers-links {
@@ -321,8 +323,16 @@ margin: 0px;}
 	margin-top: 20px;
 	font-weight: bold;
 }
-
-
+.checkbox-custom{
+	width: 13px;
+	height: 13px;
+	padding: 0;
+	margin:0;
+	vertical-align: bottom;
+	position: relative;
+	top: 15px;
+	*overflow: hidden;
+}
 /*Contact*/
 
 
@@ -2050,7 +2060,7 @@ margin: 0px;}
         margin-bottom:30px;
 
     }
-    .event_title input{
+    .event_title input, .custom-input{
         padding:6px 10px;
         color:#589CFD;
         width:80%;

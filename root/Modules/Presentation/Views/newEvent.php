@@ -641,8 +641,8 @@ function getListData($elem, $root) {
 		<div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
 			<div class="event_date form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
 				<label class="title_custom col-lg-12 col-md-12 col-sm-12 col-xs-12 no-padding"> Date de l'événement </label>
-				<input id="datepicker_deb" type="text" name="date_event" class="item  col-lg-6 col-md-6 col-sm-6 col-xs-6" value="<?php echo ($date_event->key() > 0) ? $date_event->val()->format($format[1]) : "";?>">
-				<input id="datepicker_fin" type="text" name="end_date" class="item  col-lg-6 col-md-6 col-sm-6 col-xs-6" value="<?php echo ($end_date->key() > 0) ? $end_date->val()->format($format[1]) : "";?>">
+				<input id="datepicker_deb" type="text" name="date_event" class="item  col-lg-5 col-md-5 col-sm-5 col-xs-5" value="<?php echo ($date_event->key() > 0) ? $date_event->val()->format($format[1]) : "";?>">
+				<input id="datepicker_fin" type="text" name="end_date" class="item  col-lg-5 col-lg-offset-1 col-md-5 col-md-offset-1 col-sm-5 col-sm-offset-1 col-xs-5 col-xs-offset-1" value="<?php echo ($end_date->key() > 0) ? $end_date->val()->format($format[1]) : "";?>">
 			</div>
 
 			<div class="event_title form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">

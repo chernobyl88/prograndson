@@ -1,4 +1,4 @@
-<!-- 
+<!--
 Load datatable
 -->
 <link rel="stylesheet" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
@@ -25,7 +25,7 @@ Load datatable
 			    },
 			}
 		});
-		
+
 		tinymce.init({
 			mode : "none",
 			selector:'.tinyArea',
@@ -79,20 +79,20 @@ Load datatable
 				}).on( "change", function() {
 					from.datepicker("option", "maxDate", getDate(this));
 				});
-			
+
 			function getDate(element) {
 				var date;
-				
+
 				try {
 					date = $.datepicker.parseDate("dd/mm/yy", element.value);
 				} catch( error ) {
 					date = null;
 				}
-				
+
 				return date;
 			}
 
-			
+
 			$(".validSelect, .rankSelect").change(function (e) {
 				e.preventDefault();
 
@@ -129,30 +129,30 @@ Load datatable
 		} else {
 			?>
 			var valid_ext = "jpg,jpeg,gif,png,zip"
-	
+
 			initUploader = function () {
 				var uploader = new plupload.Uploader({
 					runtimes : 'html5,silverlight,html4',
-					browse_button : 'addFile', 
+					browse_button : 'addFile',
 					drop_element : 'container',
 					url : '<?php echo $rootLang;?>/Upload/upload.html',
 					flash_swf_url : './Web/Moxie/Moxie.swf',
 					silverlight_xap_url : './Web/Moxie/Moxie.xap',
 					chunk_size: '200kb',
-					
+
 					filters : {
 						max_file_size : '10mb',
 						mime_types: [
 							{title : "Document", extensions : valid_ext}
 						]
 					},
-	
+
 					multipart_params : {
 						"dir" : "/Upload/Galerie/<?php echo $galerie->id();?>/",
 						"unzip" : 1,
 						"validExt" : valid_ext
 					},
-			
+
 					init: {
 						PostInit: function() {
 							$("#uploadfiles").click(function () {
@@ -160,7 +160,7 @@ Load datatable
 								return false;
 							})
 						},
-			
+
 						FilesAdded: function(up, files) {
 							plupload.each(files, function(file) {
 								var f = file;
@@ -215,13 +215,13 @@ Load datatable
 						ChunkUploaded: function (up, file, response) {
 							try {
 								rep = JSON.parse(response.response);
-								
+
 								if (!rep.valid) {
 									if (rep.message && rep.message[0])
 										error = rep.message[0];
 									else
 										error = "Unknown error";
-									
+
 				                    up.trigger('Error', {
 				                        code : -300, // IO_ERROR
 				                        message : 'Upload Failed: ' + error,
@@ -241,14 +241,14 @@ Load datatable
 						FileUploaded: function (up, file, response) {
 							try {
 								rep = JSON.parse(response.response);
-								
+
 								if (!rep.valid) {
 									error = "undefined error"
 									if (rep.error)
 										error = rep.error;
 									else
 										error = "Unknown error"
-									
+
 				                    up.trigger('Error', {
 				                        code : -300, // IO_ERROR
 				                        message : 'Upload Failed: ' + error,
@@ -257,7 +257,7 @@ Load datatable
 				                    });
 								} else {
 									$("#"+file.id).addClass("finished_loading")
-	
+
 									$.ajax({
 										type: "POST",
 								        url: "<?php echo $rootLang;?>/Galerie/addImage.html",
@@ -295,12 +295,12 @@ Load datatable
 						UploadProgress: function(up, file) {
 							$("#"+file.id).find(".loading").html(file.percent + "%")
 						},
-			
+
 						Error: function(up, err) {
-	
+
 							$("#"+err.file.id).find(".loading").html("Error")
 							$("#"+err.file.id).addClass("error_loading")
-							
+
 			                switch (err.code) {
 				                case -500:
 					                alertify.alert("Erreur lors de la connection au serveur. Merci de réessayer ulterieurement. Si le problème persiste, merci de contacter votre administrateur.");
@@ -314,13 +314,13 @@ Load datatable
 				                default:
 				    				alertify.alert("Error #" + err.code + ": " + err.message);
 			                }
-			                
+
 							up.destroy();
 							initUploader();
 						}
 					}
 				});
-			
+
 				uploader.init();
 			}
 			initUploader()
@@ -330,9 +330,9 @@ Load datatable
 
 		$("#gal_form").submit(function (e) {
 			tinyMCE.triggerSave();
-			
+
 			e.preventDefault();
-			
+
 			$.ajax({
 				url: "./Admin/Galerie/send.html",
 				data: $("#gal_form").serialize(),
@@ -353,7 +353,7 @@ Load datatable
 			})
 		})
 	});
-	
+
 	function changeName(pId, pName) {
 		alertify.prompt("Merci d'indiquer le nouveau nom que vous souhaitez vois pour votre image", function (e, str) {
 			if (e) {
@@ -414,7 +414,7 @@ Load datatable
 		$listeParent = "";
 		foreach ($parent AS $p)
 			$listeParent = $p->nom() . " -> " . $listeParent;
-		
+
 		echo $listeParent . $galerie->nom();
 		?>
 	</div>
@@ -427,24 +427,25 @@ Load datatable
 		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<label for="nom">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<label for="nom" class="title_custom">
 							Nom <?php echo ($concours) ? "du concours" : "de la galerie"?>
 						</label>
 					</div>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-						<input type="text" id="nom" name="nom" value="<?php echo $galerie->nom();?>" onBlur="sendForm()">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<input type="text" id="nom" class="custom-input" name="nom" value="<?php echo $galerie->nom();?>" onBlur="sendForm()">
 					</div>
 				</div>
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-					<label for="visible">Visible</label>
-					<input value="1" type="checkbox" name="visible" id="visible"<?php echo ($galerie->visible()) ? " checked" : "";?>  onChange="sendForm()">
+					<label for="visible"  class="title_custom col-lg-6 col-md-6 col-sm-6 col-xs-6 ">Visible</label>
+
+					<input value="1" class="checkbox-custom" type="checkbox" name="visible" id="visible"<?php echo ($galerie->visible()) ? " checked" : "";?>  onChange="sendForm()">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<label for="description">
+						<label for="description" class="title_custom">
 							Description
 						</label>
 					</div>
@@ -455,38 +456,38 @@ Load datatable
 				<?php
 				if ($concours) {
 					?>
-					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 no-padding">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<h3 class="center bold">Période du concours</h3>
+							<h3 class="center bold title_custom">Période du concours</h3>
 						</div>
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-								<label for="date_deb">
+								<label for="date_deb"  class="title_custom">
 									Date de début
 								</label>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-								<input name="date_deb" id="date_deb" type="text" onChange="sendForm()" value="<?php echo $galerie->date_deb()->format("d/m/Y");?>">
+								<input name="date_deb" class="margin-top-20 margin-bottom-20 custom-input" id="date_deb" type="text" onChange="sendForm()" value="<?php echo $galerie->date_deb()->format("d/m/Y");?>">
 							</div>
 						</div>
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-								<label for="date_deb">
+								<label for="date_deb"  class="title_custom">
 									Date de fin
 								</label>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-								<input name="date_fin" id="date_fin" type="text" onChange="sendForm()" value="<?php echo $galerie->date_fin()->format("d/m/Y");?>">
+								<input name="date_fin" class="margin-top-20 margin-bottom-20 custom-input" id="date_fin" type="text" onChange="sendForm()" value="<?php echo $galerie->date_fin()->format("d/m/Y");?>">
 							</div>
 						</div>
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-								<label for="show_result">
+								<label for="show_result"  class="title_custom">
 									Afficher le résultat
 								</label>
 							</div>
 							<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
-								<input value="1" type="checkbox" name="show_result" id="show_result"<?php echo ($galerie->show_result()) ? " checked" : "";?>  onChange="sendForm()">
+								<input value="1"  class="checkbox-custom" type="checkbox" name="show_result" id="show_result"<?php echo ($galerie->show_result()) ? " checked" : "";?>  onChange="sendForm()">
 							</div>
 						</div>
 					</div>
@@ -549,7 +550,7 @@ Load datatable
 				</thead>
 				<tbody>
 					<?php
-					
+
 					foreach ($files AS $g) {
 						?>
 						<tr>
