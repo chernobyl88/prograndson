@@ -281,8 +281,8 @@
     }
 
 	.box-upload {
-		border: 3px dashed #01539f;
-		background-color: #589cfd;
+		border: 3px dashed #589cfd;
+		/*background-color: #589cfd;*/
 		min-height: 200px;
 	}
 

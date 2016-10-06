@@ -502,10 +502,10 @@ Load datatable
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="listeFile">
 							</div>
 						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6  no-padding margin-top-20">
 							<a class="btn-primary btn" id="addFile">Ajouter une image</a>
 						</div>
-						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+						<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 margin-top-20">
 							<a class="btn-primary btn" id="uploadfiles">Envoyer</a>
 						</div>
 					</div>
